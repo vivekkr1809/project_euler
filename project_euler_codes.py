@@ -67,6 +67,21 @@ def problem_2():
 	# Print the time taken to run 
 	print 'Problem 2 Runtime:', str(time.time() - start_time), 'seconds'
 
+
+def check_prime(i):
+	"Checks if a number is prime"
+	sqrt_i = np.floor(np.sqrt(i)).astype(int)
+	if sqrt_i==1:
+		prime = 1
+	for j in range(2,sqrt_i+1):
+		if i % j ==0:
+			prime = 0
+			break
+		else:
+			prime = 1
+			
+	return prime
+
 def problem_3():
 	"Solution to problem 3"
 	start_time = time.time()
@@ -77,6 +92,31 @@ def problem_3():
 	"""
 	num = 600851475143 # Number whose largets prime we are seeking
 	
+	"""
+	The crude way is to find the largest prime upto sqrt(num) which divides num.
+	"""
+	largest_prime = 1 # Initialize the largest prime
+
+	sqrt_num = np.sqrt(num)
+	sqrt_num = np.floor(sqrt_num).astype(int)
+	
+	# Check if number is divisible by 2
+	if num % 2 ==0:
+		# Check if number by 2 is prime if prime it is the largest
+		if check_prime(num/2):
+			largest_prime = num/2
+		else:
+			largest_prime = 2
+
+	for i in range(3, sqrt_num+1):
+		if num % i == 0:
+			if check_prime(i) :
+				largest_prime = i
+
+	if largest_prime == 1:
+		print('The number itself is a prime')
+	
+	print('The largest prime divisor is %d' %(largest_prime))
 
 	# Print the time taken to run 
 	print 'Problem 3 Runtime:', str(time.time() - start_time), 'seconds'
@@ -85,4 +125,5 @@ if __name__ == '__main__':
 
 	#problem_1()
 	#problem_2()
+	check_prime(3)
 	problem_3()
