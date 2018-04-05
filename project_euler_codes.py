@@ -62,7 +62,7 @@ def problem_2():
 
 
 	print('The largest fibbonaci number less than %d is %d' %(max_num, fibonacci_num[1]))
-	print('The sum of numbers upto %d is %d' %(max_num, val_sum)) # Print the sum
+	print('The sum of even fibonacci numbers upto %d is %d' %(max_num, val_sum)) # Print the sum
 
 	# Print the time taken to run 
 	print 'Problem 2 Runtime:', str(time.time() - start_time), 'seconds'
@@ -116,13 +116,116 @@ def problem_3():
 	if largest_prime == 1:
 		print('The number itself is a prime')
 	
-	print('The largest prime divisor is %d' %(largest_prime))
+	print('The largest prime divisor of %d is %d' %(num, largest_prime))
 
 	# Print the time taken to run 
 	print 'Problem 3 Runtime:', str(time.time() - start_time), 'seconds'
 
+def swap_digits(num):
+	"Function to swap the digits of a number"
+	swap_num = 0
+	while num > 0:
+		swap_num = swap_num*10+num%10
+		num = num/10
+	return swap_num
+
+def problem_4():
+	"""
+	A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91x99
+	Find the largest palindrome made from the product of two 3-digit numbers.
+	"""
+	"Solution to problem 4"
+	start_time = time.time()
+
+	# n-digit number
+	n = 3
+	# Largest number which is the product of n-digit number
+	largest_num = (10**n-1)**2
+	
+	split = np.zeros([n]).astype(int)
+	num = 0
+	# Split the numbers
+	for i in range(len(split)):
+		split[i] = ((largest_num/10**n) % 10**(n-i))/(10**(n-i-1))
+		num += split[i]*10**(n-i-1)
+
+
+	for i in range(num):
+		current_num = num-i
+		current_num = current_num*(10**n)+swap_digits(current_num)
+		if current_num > largest_num:
+			pass
+		else:
+			mod = 1
+			div=0
+			current_div = 10**n-1
+			div = 0
+			while(mod!=0 and div < 10**n):
+				mod = current_num%current_div
+				div = current_num/current_div
+				current_div =current_div-1
+			if (mod == 0 and div < 10**n):
+				print('The largest such palindromic number is %d' %current_num)
+				print('The divisors are %d and %d' %(current_div+1, div))
+				break
+
+	# Print the time taken to run 
+	print 'Problem 4 Runtime:', str(time.time() - start_time), 'seconds'	
+
+def problem_5():
+	"""
+	2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+	What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+	"""
+	"Solution to problem 5"
+	start_time = time.time()
+	num = 20 # The number upto which we want the LCM of
+
+	# Print the time taken to run 
+	print 'Problem 5 Runtime:', str(time.time() - start_time), 'seconds'
+
+def problem_6():
+	"""
+	The sum of the squares of the first ten natural numbers is,
+	1^2+2^2+....+10^2= 385
+	The square of the sum of the first ten natural numbers is,
+	(1 + 2 + ... + 10)^2 = 552 = 3025
+	Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025-385 = 2640
+	Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+	"""
+	"Solution to problem 6"
+	start_time = time.time()
+
+	# Number upto which we are interested
+	num = 100
+	diff = 0
+	# Using the property
+	# (\sum_i a_i)^2 - (\sum_i a_i^2) = \sum_{i,j i!=j}2*a_i*a_j
+	for i in range(num):
+		j=i+2
+		while j <=num:
+			diff += 2*(i+1)*j
+			j+=1
+		i+=1
+
+	print('The difference between the sum of squares and squre of sum is %d' %diff)
+	# Print the time taken to run 
+	print 'Problem 6 Runtime:', str(time.time() - start_time), 'seconds'
+
+def problem_7():
+	"""
+	By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+	What is the 10 001st prime number?
+	"""
+	n = 10001 # nth prime to find
+
+
 if __name__ == '__main__':
 
-	problem_1()
-	problem_2()
-	problem_3()
+	#problem_1()
+	#problem_2()
+	#problem_3()
+	#problem_4()
+	#problem_5()
+	#problem_6()
+	problem_7()
