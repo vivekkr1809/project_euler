@@ -220,6 +220,18 @@ def problem_7():
 	n = 10001 # nth prime to find
 
 
+def problem_140():
+	"""
+	Consider the infinite polynomial series /[A_G(x) = xG_1+x^2G_2+x^3G_3+../] where /[G_k/] is the
+	/[k^{th}/] term of the second order recurrence relation G_k = G_{k-1}+G_{k-2}, G_1 = 1 and G_2 =4
+
+	Find the sum of the first thirt golden nuggets
+	"""
+	"Solution to problem 140"
+	start_time = time.time()
+
+	print 'Problem 140 Runtime:', str(time.time() - start_time), 'seconds'
+
 if __name__ == '__main__':
 
 	#problem_1()
@@ -228,4 +240,5 @@ if __name__ == '__main__':
 	#problem_4()
 	#problem_5()
 	#problem_6()
-	problem_7()
+	#problem_7()
+	problem_140()
