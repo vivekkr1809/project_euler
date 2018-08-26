@@ -172,6 +172,12 @@ def problem_4():
 	# Print the time taken to run 
 	print 'Problem 4 Runtime:', str(time.time() - start_time), 'seconds'	
 
+
+# @[param] n : an array containing the numbers whose LCM we have to find
+def find_lcm(n):
+	len_n = len(n)
+	return lcm
+
 def problem_5():
 	"""
 	2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
@@ -180,6 +186,7 @@ def problem_5():
 	"Solution to problem 5"
 	start_time = time.time()
 	num = 20 # The number upto which we want the LCM of
+
 
 	# Print the time taken to run 
 	print 'Problem 5 Runtime:', str(time.time() - start_time), 'seconds'
@@ -217,8 +224,51 @@ def problem_7():
 	By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
 	What is the 10 001st prime number?
 	"""
-	n = 10001 # nth prime to find
+	"Solution to problem 7"
+	start_time = time.time()
 
+	n = 10001 # 10001 # nth prime to find
+
+	i=0 # counter
+	# Loop while we haven't reached the required prime number
+	k = 2 # first prime assume given
+	while (i<n):
+		if(check_prime(k)):
+			i+=1
+		k+=1
+
+	print('The %dth prime is %d' %(n, k-1))
+	# Print the time taken to run 
+	print 'Problem 7 Runtime:', str(time.time() - start_time), 'seconds'
+
+def problem_8():
+	pass
+
+def problem_9():
+	pass
+
+def problem_10():
+	# Need to make more efficient. Currently takes 30 seconds.
+	"""
+	Find the sum of all primes below two millon
+	"""
+	"Solution to problem 10"
+	start_time = time.time()
+
+	n = 2000000 # sum to nth prime to find
+
+	i=2 # counter
+	# Loop while we haven't reached the required prime number
+	val_sum = 0
+
+	while (i<n):
+		if(check_prime(i)):
+			val_sum += i
+		i+=1
+
+	print('The sum of primes smaller than %d is %d' %(n, val_sum))
+	# Print the time taken to run 
+	print 'Problem 10 Runtime:', str(time.time() - start_time), 'seconds'
 
 def problem_140():
 	"""
@@ -241,4 +291,7 @@ if __name__ == '__main__':
 	#problem_5()
 	#problem_6()
 	#problem_7()
-	problem_140()
+	#problem_8()
+	#problem_9()
+	problem_10()
+	#problem_140()
