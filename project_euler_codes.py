@@ -11,6 +11,13 @@ import sympy as sp
 import scipy as scp
 import time
 
+
+# Define the function to compute the GCD
+def gcd(a, b):
+	while a % b != 0:
+		a, b = b, a % b
+	return b
+
 def problem_140():
 	"""
 	Consider the infinite polynomial series /[A_G(x) = xG_1+x^2G_2+x^3G_3+../] where /[G_k/] is the
@@ -22,6 +29,89 @@ def problem_140():
 	start_time = time.time()
 
 	print 'Problem 140 Runtime:', str(time.time() - start_time), 'seconds'
+
+def compute_prime_divisors(n, prime_n, len_prime_n):
+
+	# Initialize the prime factor divisors
+	prime_d = []
+	i = 0
+
+	while(math.sqrt(n) >= prime_n[i]):
+		if(n%prime_n[i]==0):
+			prime_d.append(prime_n[i])
+			if(n/prime_n[i] in prime_n):
+				prime_d.append(int(n/prime_n[i]))
+		if(i < len_prime_n-1):
+			i+=1
+		else:
+			break
+	return prime_d
+
+def totient_function(n, prime_n, len_prime_n):
+	# Compute the prime divisors and save
+	# into an array
+	prime_d = compute_prime_divisors(n, prime_n, len_prime_n)
+
+	# Find the number of prime divisors
+	len_prime_d = len(prime_d)
+
+	# Initialize phi with the number
+	phi = n
+	for i in range(len_prime_d):
+		phi *= (1.-1./prime_d[i])
+
+	return phi
+
+def problem_69():
+	"""
+	Find the value of n<= 1000000 for which n/phi(n) is largest
+	NOTE : Need a better algorithm. Takes 50 mins to run.	IT IS RIDICULUS
+	"""
+	"Solution to problem 69"
+	start_time = time.time()
+	n = 1000000
+
+	prime_n = erato(n)
+	len_prime_n = len(prime_n)
+
+	max_n_phi = 1
+	max_n = 1
+	for i in range(5,n):
+		quotient = float(i)/totient_function(i, prime_n, len_prime_n)
+		if(quotient > max_n_phi):
+			max_n_phi =quotient
+			max_n = i
+		print(i)
+
+	print(max_n, max_n_phi)
+
+	print 'Problem 69 Runtime:', str(time.time() - start_time), 'seconds'
+
+def sum_digits(n):
+   r = 0
+   while n:
+       r, n = r + n % 10, n // 10
+   return r
+
+def problem_56():
+	"""
+	Consider natural numbers of the form a^b, where a,b <100. What is the maximum digital sum
+	"""
+	"Solution to problem 56"
+	start_time = time.time()
+
+	max_a = 100
+	max_b = 100
+	sum_ab = 0
+	for i in range(max_a):
+		for j in range(max_b):
+			ab = (i+1)**(j+1)
+			sum_ab = max(sum_ab, sum_digits(ab))
+
+	print(sum_ab)
+
+	print 'Problem 56 Runtime:', str(time.time() - start_time), 'seconds'
+
 
 def problem_45():
 	"""
@@ -368,10 +458,12 @@ if __name__ == '__main__':
 	#problem_5()
 	#problem_6()
 	#problem_7()
-	problem_8()
+	#problem_8()
 	#problem_9()
 	#problem_10()
 	#problem_11()
 	#problem_12()
-	problem_45()
+	#problem_45()
+	#problem_56()
+	problem_69()
 	#problem_140()
